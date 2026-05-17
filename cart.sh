@@ -1,13 +1,13 @@
-RED=\e[0;31m
-GREEN=\e[0;32m
-YELLOW=\e[0;33m
-RESET=\e[0m
+RED="\e[0;31m"
+GREEN="\e[0;32m"
+YELLOW="\e[0;33m"
+RESET="\e[0m"
 
 function echo_line(){
-    echo "$1>>>>>>>$2<<<<<<<<<$RESET" 
+    echo -e "$YELLOW>>>>>>>$1<<<<<<<<<$RESET" 
 }
 
-echo_line YELLOW InstallNodeJs
+echo_line "InstallNodeJs"
 
 curl -fsSL https://rpm.nodesource.com/setup_20.x | bash -
 dnf install -y nodejs
