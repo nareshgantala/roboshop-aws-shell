@@ -1,3 +1,6 @@
+component=$1
+source "$(dirname "${component}.sh")/common.sh"
+
 echo "$YELLOW>>>>>>> Install Valkey <<<<<<<<<$RESET" | tee -a ${log_file}
 
 dnf install -y valkey &>>${log_file}
