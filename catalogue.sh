@@ -5,9 +5,9 @@ go_call
 
 echo "$YELLOW>>>>>>>Setup Database<<<<<<<<<$RESET"
 
-mysql -h <MYSQL-SERVER-IP> -u root -pRoboShop@1 < db/schema.sql
-mysql -h <MYSQL-SERVER-IP> -u root -pRoboShop@1 < db/app-user.sql
-mysql -h <MYSQL-SERVER-IP> -u root -pRoboShop@1 catalogue < db/master-data.sql
+mysql -h mysql.naresh-training.online -u root -pRoboShop@1 < db/schema.sql
+mysql -h mysql.naresh-training.online -u root -pRoboShop@1 < db/app-user.sql
+mysql -h mysql.naresh-training.online -u root -pRoboShop@1 catalogue < db/master-data.sql
 
 
 

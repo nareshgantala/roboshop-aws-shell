@@ -7,8 +7,8 @@ echo "$YELLOW>>>>>>> Install Python 3 <<<<<<<<<$RESET"
 dnf install -y python3 python3-pip mysql8.4
 
 
-mysql -h <MYSQL-SERVER-IP> -u root -pRoboShop@1 < db/schema.sql
-mysql -h <MYSQL-SERVER-IP> -u root -pRoboShop@1 < db/app-user.sql
+mysql -h mysql.naresh-training.online -u root -pRoboShop@1 < db/schema.sql
+mysql -h mysql.naresh-training.online -u root -pRoboShop@1 < db/app-user.sql
 
 echo "$YELLOW>>>>>>>Deploy Application <<<<<<<<<$RESET"
 
