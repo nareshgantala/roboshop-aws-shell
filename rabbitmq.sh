@@ -8,7 +8,7 @@ enabled=1
 EOF &>>${log_file}
 dnf install -y erlang &>>${log_file}
 
-echo "$YELLOW>>>>>>> Add the RabbitMQ Repository and Install <<<<<<<<<$RESET"
+echo "$YELLOW>>>>>>> Add the RabbitMQ Repository and Install <<<<<<<<<$RESET" | tee -a ${log_file}
 cat > /etc/yum.repos.d/rabbitmq_rabbitmq-server.repo << 'EOF'
 [rabbitmq_rabbitmq-server]
 name=rabbitmq_rabbitmq-server
@@ -19,7 +19,7 @@ EOF &>>${log_file}
 
 dnf install -y rabbitmq-server &>>${log_file}
 
-echo "$YELLOW>>>>>>> Enable and Start <<<<<<<<<$RESET"
+echo "$YELLOW>>>>>>> Enable and Start <<<<<<<<<$RESET" | tee -a ${log_file}
 systemctl enable rabbitmq-server &>>${log_file}
 systemctl start rabbitmq-server &>>${log_file}
 
@@ -29,4 +29,3 @@ rabbitmqctl set_user_tags roboshop administrator &>>${log_file}
 rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*" &>>${log_file}
 
 systemctl restart rabbitmq-server &>>${log_file}
-
