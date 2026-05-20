@@ -67,8 +67,8 @@ function pre_req(){
 function systemd_call(){
     echo_line "enable and restart systemd service"
     systemctl daemon-reload &>>${log_file}
-    systemctl enable {component} &>>${log_file}
-    systemctl restart {component} &>>${log_file}
+    systemctl enable ${component} &>>${log_file}
+    systemctl restart ${component} &>>${log_file}
     status_check "restart service"
 }
 
