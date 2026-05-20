@@ -137,7 +137,7 @@ function mongo_call(){
 function java_call(){
     pre_req
     
-    echo "Install Java 21"
+    echo_line "Install Java 21"
     dnf install -y java-21-openjdk java-21-openjdk-devel maven &>>${log_file}
     mvn clean package -DskipTests &>>${log_file}
     cp target/${component}.jar /app/${component}.jar &>>${log_file}
