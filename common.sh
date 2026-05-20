@@ -28,6 +28,7 @@ function status_check(){
 
 function pre_req(){
     dnf install -y unzip
+    
     if [ -e ${component}.service ]
     then
         echo_line "copy ${component}.service configuration file"
