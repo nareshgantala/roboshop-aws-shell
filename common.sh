@@ -6,7 +6,7 @@ YELLOW="\e[0;33m"
 RESET="\e[0m"
 
 function echo_line(){
-    echo -e "$YELLOW>>>>>>>$1<<<<<<<<<$RESET" 
+    echo -e "$YELLOW>>>>>>>$1<<<<<<<<<$RESET" | tee -a ${log_file}
 }
 
 function success(){
@@ -115,20 +115,20 @@ function nginx_call(){
 }
 
 function mongo_call(){
-    echo_line "Add the MongoDB 7.0"
-    cp mongo.repo /etc/yum.repos.d/mongodb-org-7.0.repo
+    echo_line "Add the MongoDB 7.0" 
+    cp mongo.repo /etc/yum.repos.d/mongodb-org-7.0.repo &>>${log_file}
 
     echo_line "Install the Package"
-    dnf install -y mongodb-org
+    dnf install -y mongodb-org &>>${log_file}
 
     echo_line "Enable and Start"
-    systemctl enable mongod
-    systemctl start mongod
+    systemctl enable mongod &>>${log_file}
+    systemctl start mongod &>>${log_file}
 
 
-    sed -i "s/bindIp: 127.0.0.1/bindIp: 0.0.0.0/" /etc/mongod.conf
+    sed -i "s/bindIp: 127.0.0.1/bindIp: 0.0.0.0/" /etc/mongod.conf &>>${log_file}
 
-    systemctl restart mongod
+    systemctl restart mongod &>>${log_file}
 }
 
 function java_call(){
