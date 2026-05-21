@@ -1,4 +1,4 @@
-component=$1
+component=user
 source "$(dirname "${component}.sh")/common.sh"
 
 nodejs_call
