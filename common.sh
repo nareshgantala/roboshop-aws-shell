@@ -100,55 +100,45 @@ function go_call(){
     systemd_call
 }
 
-function nginx_call(){
-    echo_line "Install Nginx 1.26"
-    dnf install -y nginx &>>${log_file}
-    systemctl enable nginx &>>${log_file}
-    systemctl start nginx &>>${log_file}
-    echo_line "Download, Build, and Deploy"
-    curl -L -o /tmp/frontend.zip https://raw.githubusercontent.com/raghudevopsb89/roboshop-microservices/main/artifacts/frontend.zip
-    mkdir -p /tmp/frontend && cd /tmp/frontend &>>${log_file}
-    unzip /tmp/frontend.zip &>>${log_file}
-    npm install &>>${log_file}
-    npm run build &>>${log_file}
-    rm -rf /usr/share/nginx/html/* &>>${log_file}
-    cp -r out/* /usr/share/nginx/html/ &>>${log_file}
-    echo_line "Configure Nginx" &>>${log_file}
-    cp nginx.conf /etc/nginx/nginx.conf &>>${log_file}
-    systemctl restart nginx &>>${log_file}
-}
 
-function mongo_call(){
-    echo_line "Add the MongoDB 7.0" 
-    cp mongo.repo /etc/yum.repos.d/mongodb-org-7.0.repo &>>${log_file}
- 
-    echo_line "Install the Package"
-    dnf install -y mongodb-org &>>${log_file} 
-
-    echo_line "Enable and Start"
-    systemctl enable mongod &>>${log_file}
-    systemctl start mongod &>>${log_file}
-
-
-    sed -i "s/bindIp: 127.0.0.1/bindIp: 0.0.0.0/" /etc/mongod.conf &>>${log_file}
-
-    systemctl restart mongod &>>${log_file}
-}
 
 function java_call(){
     pre_req
     
     echo_line "Install Java 21"
     dnf install -y java-21-openjdk java-21-openjdk-devel maven &>>${log_file}
+    status_check "install java, maven"
+
     mvn clean package -DskipTests &>>${log_file}
+    status_check "mvn build"
+
     cp target/${component}.jar /app/${component}.jar &>>${log_file}
+    status_check "copy jar file tp /app"
 
     systemd_call
 }
 
 function pyth_call() {
     pre_req
+
     echo "Install Python 3"
     dnf install -y python3 python3-pip &>>${log_file}
-    pip3 install -r requirements.txt &>>${log_file}
+    status_check "install python"
+
+    pip3 install -r requirements.txt ${extra_pip_packages} &>>${log_file}
+    status_check "install python dependencies"
+
+    systemd_call
+}
+
+
+function schema_load(){
+    if [ $schema == "mysql" ]
+    then
+        for type in $schema_type
+        do
+          echo_line Setup Database-${type}
+          mysql -h mysql.naresh-training.online -u root -pRoboShop@1 < $type 
+        done
+    fi
 }
