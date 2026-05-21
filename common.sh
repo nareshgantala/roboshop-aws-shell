@@ -90,6 +90,7 @@ function nodejs_call(){
 
 function go_call(){
     pre_req
+
     echo_line "Install Go 1.22"
     dnf install -y golang git mysql8.4 &>>${log_file}
     go version &>>${log_file}
@@ -97,6 +98,7 @@ function go_call(){
     echo_line "Bild go app"
     go mod tidy &>>${log_file}
     CGO_ENABLED=0 go build -o /app/catalogue . &>>${log_file}
+    
     systemd_call
 }
 
@@ -138,7 +140,7 @@ function schema_load(){
         for type in $schema_type
         do
           echo_line Setup Database-${type}
-          mysql -h mysql.naresh-training.online -u root -pRoboShop@1 < $type 
+          mysql -h mysql.naresh-training.online -u root -pRoboShop@1 < db/$type 
         done
     fi
 }
