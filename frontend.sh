@@ -25,7 +25,7 @@ status_check "download code"
 mkdir -p /tmp/frontend && cd /tmp/frontend &>>${log_file}
 
 
-unzip /tmp/frontend.zip &>>${log_file}
+unzip -o /tmp/frontend.zip &>>${log_file}
 status_check "unzip code"
 
 npm install &>>${log_file}
