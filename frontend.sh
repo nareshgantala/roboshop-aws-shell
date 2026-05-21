@@ -14,6 +14,10 @@ systemctl enable nginx &>>${log_file}
 systemctl start nginx &>>${log_file}
 status_check "start nginx service"
 
+curl -fsSL https://rpm.nodesource.com/setup_20.x | bash -
+dnf install -y nodejs
+status_check "Install Nodejs"
+
 echo_line "Download, Build, and Deploy"
 curl -L -o /tmp/frontend.zip https://raw.githubusercontent.com/raghudevopsb89/roboshop-microservices/main/artifacts/frontend.zip
 status_check "download code"
