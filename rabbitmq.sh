@@ -8,7 +8,7 @@ name=rabbitmq_erlang
 baseurl=https://packagecloud.io/rabbitmq/erlang/el/9/$basearch
 gpgcheck=0
 enabled=1
-EOF 
+EOF
 dnf install -y erlang &>>${log_file}
 status_check "install erlang"
 
