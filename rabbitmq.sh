@@ -1,3 +1,6 @@
+
+source "$(dirname "${component}.sh")/common.sh"
+
 echo_line "Install Erlang"
 cat > /etc/yum.repos.d/rabbitmq_erlang.repo << 'EOF'
 [rabbitmq_erlang]
