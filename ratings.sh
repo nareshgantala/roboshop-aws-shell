@@ -8,6 +8,7 @@ extra_pip_packages=cryptography
 schema=mysql
 schema_type="db/schema.sql db/app-user.sql"
 
-schema_load
+
 
 pyth_call
+schema_load
