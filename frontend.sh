@@ -1,9 +1,11 @@
 component=frontend
 
 source "$(dirname "${component}.sh")/common.sh"
+dnf install -y unzip &>>${log_file}
+status_check "Install unzip"
 
 echo_line "Install Nginx 1.26"
-dnf install -y nginx unzip &>>${log_file}
+dnf install -y nginx &>>${log_file}
 status_check "Install Nginx 1.26"
 
 echo_line "Configure Nginx" &>>${log_file}
