@@ -2,24 +2,24 @@
 source "$(dirname "${component}.sh")/common.sh"
 
 echo_line "Install Erlang"
-cat > /etc/yum.repos.d/rabbitmq_erlang.repo << 'EOF'
+cat > /etc/yum.repos.d/rabbitmq_erlang.repo << 'EOF' 2>>${log_file}
 [rabbitmq_erlang]
 name=rabbitmq_erlang
 baseurl=https://packagecloud.io/rabbitmq/erlang/el/9/$basearch
 gpgcheck=0
 enabled=1
-EOF &>>${log_file}
+EOF 
 dnf install -y erlang &>>${log_file}
 status_check "install erlang"
 
 echo_line "Add the RabbitMQ Repository and Install"
-cat > /etc/yum.repos.d/rabbitmq_rabbitmq-server.repo << 'EOF'
+cat > /etc/yum.repos.d/rabbitmq_rabbitmq-server.repo << 'EOF' 2>>${log_file}
 [rabbitmq_rabbitmq-server]
 name=rabbitmq_rabbitmq-server
 baseurl=https://packagecloud.io/rabbitmq/rabbitmq-server/el/9/$basearch
 gpgcheck=0
 enabled=1
-EOF &>>${log_file}
+EOF
 
 dnf install -y rabbitmq-server &>>${log_file}
 status_check "install rabbitmq server"
