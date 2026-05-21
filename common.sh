@@ -108,7 +108,7 @@ function java_call(){
     pre_req
     
     echo_line "Install Java 21"
-    dnf install -y java-21-openjdk java-21-openjdk-devel maven &>>${log_file}
+    dnf install -y java-21-openjdk java-21-openjdk-devel maven mysql8.4 &>>${log_file}
     status_check "install java, maven"
 
     mvn clean package -DskipTests &>>${log_file}
