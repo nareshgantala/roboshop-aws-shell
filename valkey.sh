@@ -11,7 +11,7 @@ status_check "start valkey"
 
 echo_line "configure valkey"
 sed -i "s/bind 127.0.0.1/bind 0.0.0.0/" /etc/valkey/valkey.conf &>>${log_file}
-sed -i "s/protected-mode yes/protected-mode no" /etc/valkey/valkey.conf &>>${log_file}
+sed -i "s/protected-mode yes/protected-mode no/" /etc/valkey/valkey.conf &>>${log_file}
 status_check "update bind ip, protected mode"
 
 systemctl restart valkey &>>${log_file}
